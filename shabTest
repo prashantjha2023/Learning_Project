@@ -1,0 +1,35 @@
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+  }) 
+    // log in
+    //Click the 'Reports' button at the bottom of admin bar
+    
+import { LoginPage } from "./pages/login_page"
+
+const loginShab= new LoginPage ()
+
+    
+    it('Verify Click the Reports button at the bottom of admin bar', function(){
+
+       cy.visit('https://regression.brandworkz.net/bms/')
+        
+        loginShab.enterUsername()
+        loginShab.enterPassword()
+        loginShab.clickLogin()
+        // click reports page -redirect without credentials
+       
+        cy.get('.admin-bar__right > :nth-child(2) > .navigation-link__link').click()
+       
+        cy.get('div > ul > :nth-child(3) > a')
+        .should('contain', 'Reporting')
+        
+
+
+        // cy.contains('Reporting')
+        // .should('contain', 'Button')
+        // .and('have.href', '>Reporting</a>')
+        // .and('be.visible')
+    
+    }) 
